@@ -1,18 +1,10 @@
 console.log("Before");
-getUser(1, getRepositories);
+getUser(1)
+  .then((user) => getRepositories(user.gitHubUsername))
+  .then((repos) => getCommits(repos[0]))
+  .then((commits) => console.log("Commits", commits))
+  .catch((err) => console.log("Error", err.message));
 console.log("After");
-
-function getRepositories(user) {
-  getRepositories(user.gitHubUsername, getCommits);
-}
-
-function getCommits(gitHubUsername) {
-  getCommits(repo, displayCommits);
-}
-
-function displayCommits(commits) {
-  console.log(commits);
-}
 
 // Promises
 // A promise holds the eventual result of an asynchronous operation. It promises to give you something, even if it's an error!
